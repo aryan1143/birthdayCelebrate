@@ -4,6 +4,7 @@ import { playMusic, playSfx } from "../utils/soundManager";
 import { useTypewriter } from "../hooks/useTypewriter";
 import { LETTER_CONTENT } from "../data/letterContent";
 import backgroundImage from "../assets/background.jpg";
+import letterBgImage from "../assets/letter-bg.png";
 
 export default function BirthdayLetter({ name, onFinish }) {
   const [stage, setStage] = useState("envelope"); // 'envelope', 'opening', 'letter', 'end'
@@ -23,8 +24,8 @@ export default function BirthdayLetter({ name, onFinish }) {
     setStage("opening");
 
     // Play sounds
-    playSfx('envelope');
-    playMusic('letter', 1200);
+    playSfx("envelope");
+    playMusic("letter", 1200);
 
     // Transition to letter after animation
     setTimeout(() => {
@@ -42,7 +43,9 @@ export default function BirthdayLetter({ name, onFinish }) {
   const { displayedText, isComplete, skip } = useTypewriter({
     text: currentText,
     speed: 45,
-    isActive: (stage === 'letter' || stage === 'end') && lineIndex < LETTER_CONTENT.lines.length
+    isActive:
+      (stage === "letter" || stage === "end") &&
+      lineIndex < LETTER_CONTENT.lines.length,
   });
 
   // Auto-advance logic
@@ -159,28 +162,36 @@ export default function BirthdayLetter({ name, onFinish }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="w-full rounded-sm bg-[#fdfaf6] p-8 md:p-12 shadow-2xl border border-amber-900/10 min-h-[60vh] max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <div
+              className="w-full rounded-sm bg-cover bg-center bg-no-repeat bg-[#f8fbff] px-8 pt-16 pb-28 md:px-12 md:pt-24 md:pb-40 shadow-2xl border border-blue-900/10 min-h-[60vh] max-h-[85vh] overflow-y-auto custom-scrollbar"
+              style={{ backgroundImage: `url(${letterBgImage})` }}
+            >
               {/* Greeting */}
-              <h1 className="mb-8 font-serif text-2xl md:text-3xl font-semibold leading-loose text-amber-900/80">
+              <h1 className="mb-4 font-serif text-2xl md:text-3xl font-semibold leading-loose text-blue-950/80">
                 {lineIndex === -1
                   ? displayedText
                   : LETTER_CONTENT.greeting.replace("Friend", name)}
               </h1>
 
               {/* Previous Lines */}
-              <div className="flex flex-col space-y-6 font-serif text-lg md:text-xl text-amber-900/70 leading-relaxed">
+              <div className="flex flex-col space-y-2 font-serif text-lg md:text-xl text-blue-950/70 leading-relaxed">
                 {previousLines.map((line, i) => (
-                  <p key={i} className="opacity-100">
+                  <p
+                    key={i}
+                    className={`opacity-100 ${i >= LETTER_CONTENT.lines.length - 2 ? "text-right" : ""}`}
+                  >
                     {line}
                   </p>
                 ))}
 
                 {/* Currently Typing Line */}
                 {lineIndex >= 0 && (
-                  <p className="min-h-[1.5em]">
+                  <p
+                    className={`min-h-[1.5em] ${lineIndex >= LETTER_CONTENT.lines.length - 2 ? "text-right" : ""}`}
+                  >
                     {displayedText}
                     {!isComplete && (
-                      <span className="inline-block w-1.5 h-5 ml-1 bg-amber-900/40 animate-pulse" />
+                      <span className="inline-block w-1.5 h-5 ml-1 bg-blue-900/40 animate-pulse align-middle" />
                     )}
                   </p>
                 )}

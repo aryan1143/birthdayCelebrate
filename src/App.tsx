@@ -114,6 +114,24 @@ function App() {
       )}
 
 
+      {/* Dev Menu */}
+      {import.meta.env.DEV && (
+        <div className="fixed bottom-4 left-4 z-[9999] flex flex-wrap gap-2 rounded-xl bg-black/80 p-3 shadow-xl max-w-[200px]">
+          <span className="w-full text-xs font-bold text-white/50 mb-1">DEV NAVIGATION</span>
+          {['home', 'feed', 'puzzle', 'ingredients', 'cake', 'letter'].map((p) => (
+            <button
+              key={p}
+              onClick={() => {
+                setTransition(null)
+                setPage(p as Page)
+              }}
+              className="px-2 py-1 bg-white/10 hover:bg-white/25 rounded text-xs text-white capitalize transition-colors"
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+      )}
     </GameProvider>
   )
 }
