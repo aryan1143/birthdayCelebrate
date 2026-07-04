@@ -129,7 +129,7 @@ export default function CakeBaking({ name, onComplete }) {
                 className="absolute top-[100px] z-30 rounded-2xl rounded-tl-sm bg-white p-3 shadow-lg min-h-[44px]"
               >
                 <p className="text-sm font-semibold text-slate-600">
-                  <TypewriterText text="Oh no... I think I messed it up..." />
+                  <TypewriterText text="Oh no... I think I messed it up...  :(" />
                 </p>
               </motion.div>
             )}
@@ -143,7 +143,7 @@ export default function CakeBaking({ name, onComplete }) {
                 className="absolute top-[100px] z-30 rounded-2xl rounded-tl-sm bg-white p-3 shadow-lg min-h-[44px]"
               >
                 <p className="text-sm font-semibold text-slate-600">
-                  <TypewriterText text="Okay... let's try that again!" />
+                  <TypewriterText text="Okay... let's try that again :3" />
                 </p>
               </motion.div>
             )}
